@@ -1,0 +1,11 @@
+[package]
+name = "doryen-fov"
+version = "0.1.0"
+authors = ["jice <jice.nospam@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+
+[dev-dependencies]
+doryen-rs = "*"
+rand = "*"
