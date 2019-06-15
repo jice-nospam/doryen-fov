@@ -1,10 +1,13 @@
 [package]
 name = "doryen-fov"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["jice <jice.nospam@gmail.com>"]
 edition = "2018"
 description = "A pure rust library containing 2D field of view algorithms for roguelikes."
 license = "MIT"
+documentation = "https://docs.rs/doryen-fov"
+repository = "https://github.com/jice-nospam/doryen-fov"
+keywords = ["roguelike", "console", "field_of_view", "fov"]
 
 [dependencies]
 
