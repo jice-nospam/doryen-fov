@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/jice-nospam/doryen-fov.svg)](https://travis-ci.org/jice-nospam/doryen-fov)
 [![Documentation](https://docs.rs/doryen-fov/badge.svg)](https://docs.rs/doryen-fov)
 [![crates.io](https://meritbadge.herokuapp.com/doryen-fov)](https://crates.io/crates/doryen-fov)
+[![License: MIT](https://img.shields.io/badge/license-MIT-informational.svg)](#license)
 
 A pure rust library containing 2D field of view algorithms for roguelikes.
 
@@ -46,6 +47,10 @@ fn main() {
     assert!(map.is_in_fov(5, 7));
 }
 ```
+
+# license
+
+This code is released under the MIT license.
 
 # contributions
 
