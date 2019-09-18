@@ -1,7 +1,6 @@
 extern crate doryen_rs;
 extern crate rand;
 
-
 use doryen_fov::{FovAlgorithm, FovRecursiveShadowCasting, FovRestrictive, MapData};
 use doryen_rs::{App, AppOptions, Color, DoryenApi, Engine, TextAlign};
 use rand::Rng;
@@ -17,15 +16,15 @@ const STARTING_RADIUS: usize = 20;
 
 struct MyRoguelike {
     player_pos: (i32, i32),
-    fov: Vec<Box<FovAlgorithm>>,
+    fov: Vec<Box<dyn FovAlgorithm>>,
     map: MapData,
     fov_num: usize,
     radius: usize,
 }
 
 impl Engine for MyRoguelike {
-    fn init(&mut self, _api: &mut DoryenApi) {}
-    fn update(&mut self, api: &mut DoryenApi) {
+    fn init(&mut self, _api: &mut dyn DoryenApi) {}
+    fn update(&mut self, api: &mut dyn DoryenApi) {
         let input = api.input();
         if input.key("ArrowLeft") {
             self.player_pos.0 = (self.player_pos.0 - 1).max(1);
@@ -57,7 +56,7 @@ impl Engine for MyRoguelike {
             false,
         );
     }
-    fn render(&mut self, api: &mut DoryenApi) {
+    fn render(&mut self, api: &mut dyn DoryenApi) {
         let con = api.con();
         con.rectangle(
             0,
@@ -107,7 +106,7 @@ impl Engine for MyRoguelike {
             Some(DARK_WALL),
         );
     }
-    fn resize(&mut self, _api: &mut DoryenApi) {}
+    fn resize(&mut self, _api: &mut dyn DoryenApi) {}
 }
 
 impl MyRoguelike {
@@ -118,7 +117,7 @@ impl MyRoguelike {
             map.transparent[rng.gen_range(0, CONSOLE_WIDTH as usize * CONSOLE_HEIGHT as usize)] =
                 false;
         }
-        let mut fov: Vec<Box<FovAlgorithm>> = Vec::new();
+        let mut fov: Vec<Box<dyn FovAlgorithm>> = Vec::new();
         fov.push(Box::new(FovRecursiveShadowCasting::new()));
         fov.push(Box::new(FovRestrictive::new()));
         let mut me = Self {
