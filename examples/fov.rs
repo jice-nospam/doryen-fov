@@ -2,7 +2,7 @@ extern crate doryen_rs;
 extern crate rand;
 
 use doryen_fov::{FovAlgorithm, FovRecursiveShadowCasting, FovRestrictive, MapData};
-use doryen_rs::{App, AppOptions, Color, DoryenApi, Engine, TextAlign};
+use doryen_rs::{App, AppOptions, Color, DoryenApi, Engine, TextAlign, UpdateEvent};
 use rand::Rng;
 const CONSOLE_WIDTH: u32 = 80;
 const CONSOLE_HEIGHT: u32 = 50;
@@ -24,7 +24,7 @@ struct MyRoguelike {
 
 impl Engine for MyRoguelike {
     fn init(&mut self, _api: &mut dyn DoryenApi) {}
-    fn update(&mut self, api: &mut dyn DoryenApi) {
+    fn update(&mut self, api: &mut dyn DoryenApi) -> Option<UpdateEvent> {
         let input = api.input();
         if input.key("ArrowLeft") {
             self.player_pos.0 = (self.player_pos.0 - 1).max(1);
@@ -55,6 +55,8 @@ impl Engine for MyRoguelike {
             self.radius,
             false,
         );
+
+        return None;
     }
     fn render(&mut self, api: &mut dyn DoryenApi) {
         let con = api.con();
@@ -92,7 +94,7 @@ impl Engine for MyRoguelike {
         con.print(
             (CONSOLE_WIDTH / 2) as i32,
             (CONSOLE_HEIGHT - 1) as i32,
-            "arrows : move | +/- : change radius | PageUp/PageDown : change algorithm",
+            "arrows : move | +/- : change radius | PageUp/PageDown : change algorithm, x : quit",
             TextAlign::Center,
             Some((255, 255, 255, 255)),
             Some(DARK_WALL),
@@ -150,6 +152,7 @@ fn main() {
         fullscreen: false,
         show_cursor: true,
         resizable: true,
+        intercept_close_request: false,
     });
     app.set_engine(Box::new(MyRoguelike::new()));
     app.run();

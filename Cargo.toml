@@ -12,5 +12,5 @@ keywords = ["roguelike", "console", "field_of_view", "fov"]
 [dependencies]
 
 [dev-dependencies]
-doryen-rs = "1.*"
+doryen-rs = ">=1.2, <2.0"
 rand = "0.6.*"
